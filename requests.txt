@@ -11,7 +11,8 @@ parameters : {
 }
 
 returns : {
-     setcookie("token") // sets the token cookie
+     userid,
+     token // must be stored in local storage or in a cookie
 }
 
 ----------------------------------------
@@ -38,7 +39,7 @@ format: JSON, accept: JSON
 
 parameters: {
     token,
-    userid (OPTIONNAL)
+    userid (OPTIONNAL) id of the user to inspect
 }
 
 returns: {
