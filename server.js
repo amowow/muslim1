@@ -8,6 +8,8 @@ app.set('view engine','ejs');
 app.engine('ejs', require('ejs').__express);
 app.use(cookies.express("a","b","c"));
 
+const interface = require("./interface")
+
 app.get("/", (req, res) => {
     if(res.cookies.get("token")) {
         res.render("home");
