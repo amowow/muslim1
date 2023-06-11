@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register</title>
+  <link rel="stylesheet" type="text/css" href="login.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Register</h1>
+    <form id="registerForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" required>
+      <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="index.html">Login</a></p>
+  </div>
+  
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+
+      if (username && password) {
+        // Retrieve user data from local storage
+        var users = JSON.parse(localStorage.getItem("users")) || [];
+
+        // Check if the entered username already exists
+        var userExists = users.find(u => u.username === username);
+        if (userExists) {
+          alert("Username already exists. Please choose a different username.");
+        } else {
+          // Add the new user to the user list
+          users.push({ username: username, password: password });
+
+          // Store the updated user list in local storage
+          localStorage.setItem("users", JSON.stringify(users));
+
+          // Redirect to the login page
+          window.location.href = "home.html";
+        }
+      } else {
+        alert("Please enter a username and password.");
+      }
+    });
+  </script>
+</body>
+</html>
