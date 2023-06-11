@@ -1,5 +1,7 @@
 This document describes the requests/commands that can be issued to the website's server
 
+STATUS 400 Means Bad request
+
 --------------------------------
 /if/login
 method: POST
@@ -10,10 +12,12 @@ parameters : {
     password : upto 255 characters
 }
 
-returns : {
+STATUS 200 returns : {
      userid,
      token // must be stored in local storage or in a cookie
 }
+
+STATUS 401 : User not found
 
 ----------------------------------------
 
@@ -27,9 +31,11 @@ parameters : {
     // You can add whatever you like here
 }
 
-returns : {
-     setcookie("token")
+STATUS 200 returns : {
+     userid,
+     token // must be stored in local storage or in a cookie
 }
+STATUS 401 : Username already exists
 
 ----------------------------------------
 
@@ -42,10 +48,11 @@ parameters: {
     userid (OPTIONNAL) id of the user to inspect
 }
 
-returns: {
+STATUS 200 returns: {
     username,
     // You can add whatever you like here
 }
+STATUS 401 User does not exist
 
 -------------------------------------------
 
