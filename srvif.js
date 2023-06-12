@@ -1,6 +1,7 @@
 "use strict"
 const router = require("express").Router();
 
+const { json } = require("express");
 const { v4: uuidv4 } = require('uuid');
 
 const db = require("mysql").createConnection({
@@ -18,7 +19,7 @@ router.post("/login", (req, res) => {
     if(!rbc(username) || !rbc(password)) {
         return DenyRequest(req, res)
     }
-    if(username.length > 128 || password.length > 255) return DenyRequest(req, res);
+    if(!username.length || !password.length || username.length > 128 || password.length > 255) return DenyRequest(req, res);
 
 
     db.query("SELECT * FROM users WHERE `username` = ? AND `password` = ?", [username, password], (err, dbres) => {
@@ -53,7 +54,7 @@ router.post("/register", (req, res) => {
     if(!rbc(username) || !rbc(password)) {
         return DenyRequest(req, res)
     }
-    if(username.length > 128 || password.length > 255) return DenyRequest(req, res);
+    if(!username.length || !password.length || username.length > 128 || password.length > 255) return DenyRequest(req, res);
     db.query("SELECT * FROM users WHERE username = ?", [username], (err, dbres) => {
         if(err) throw err;
         if(dbres.length) {
@@ -78,17 +79,122 @@ router.post("/register", (req, res) => {
 /* Show messages request
    request format : json
    parameters : {
-        token:
+        token,
+        userid
+   }
+   returns : {
+    NumMessages,
+    Messages[]
    }
 */
 router.post("/messages", (req, res) => {
+    const token = req.body.token;
+    const userid = req.body.userid;
+    if(typeof token != 'string' || token.length != 36 || typeof userid != 'number') return DenyRequest(req, res);
+    db.query("SELECT * FROM `tokens` WHERE token = ?", [token], (err, dbres) => {
+        if(err) throw err;
+        if(!dbres.length) {
+            res.status(401);
+            res.send("Unauthorized");
+            return;
+        }
+        const requserid = dbres[0].userid;
+        if(userid == requserid) return DenyRequest(req, res);
 
+        db.query("SELECT * FROM users WHERE userid = ?", [userid], (err, dbres1) => {
+            if(err) throw err;
+            if(!dbres1.length) {
+                res.status(401);
+                res.send("User does not exist");
+                return;
+            }
+            db.query("SELECT * FROM messages WHERE (`sender` = ? AND `receiver` = ?) OR (`sender` = ? AND `receiver` = ?)", [requserid, userid, userid, requserid], (err, dbres2) => {
+                if(err) throw err;
+                res.status(200);
+                
+                res.json({NumMessages: dbres2.length, Messages: dbres2});
+            })
+        })
+    })
 })
 
-// // Displays the list of active chats
-// router.post("/if/chats", (req, res) => {
+/* Send message request
+   request format : json
+   parameters : {
+        token,
+        userid,
+        message: max 0xFFFF Characters
+   }
+   returns STATUS (200 for OK) otherwise the request has failed
+*/
+router.post("/send", (req, res) => {
+    const token = req.body.token;
+    const userid = req.body.userid;
+    const message = req.body.message;
+    if(typeof token != 'string' || token.length != 36 || typeof userid != 'number' ||
+    typeof message != 'string' || !message.length || message.length > 0xFFFF
+    ) return DenyRequest(req, res);
+    db.query("SELECT * FROM `tokens` WHERE token = ?", [token], (err, dbres) => {
+        if(err) throw err;
+        if(!dbres.length) {
+            res.status(401);
+            res.send("Unauthorized");
+            return;
+        }
+        const requserid = dbres[0].userid;
+        if(userid == requserid) return DenyRequest(req, res);
+        db.query("SELECT * FROM users WHERE userid = ?", [userid], (err, dbres1) => {
+            if(err) throw err;
+            if(!dbres1.length) {
+                res.status(401);
+                res.send("User does not exist");
+                return;
+            }
+            db.query("INSERT INTO `messages` (content, sender, receiver) VALUES(?, ?, ?)", [message, requserid, userid], (err, dbres2) => {
+                if(err) throw err;
+                res.status(200);
+                res.send("OK");
+            })
+        })
+    })
+})
 
-// })
+// Displays the list of active chats
+// parameters : token
+router.post("/chats", (req, res) => {
+    const token = req.body.token;
+    if(typeof token != 'string' || token.length != 36) return DenyRequest(req, res);
+    db.query("SELECT * FROM `tokens` WHERE token = ?", [token], (err, dbres) => {
+        if(err) throw err;
+        if(!dbres.length) {
+            res.status(401);
+            res.send("Unauthorized");
+            return;
+        }
+        const requserid = dbres[0].userid;
+        db.query("SELECT * FROM `messages` WHERE sender = ? OR receiver = ?", [requserid, requserid], (err, dbres1) => {
+            if(err) throw err;
+            var userarray = [];
+
+            for(var i = 0;i<dbres1.length;i++) {
+                const msg = dbres1[i];
+                var uid;
+
+                if(msg.sender == requserid) uid = msg.receiver;
+                else uid = msg.sender;
+                
+                console.log(`message ${uid}`)
+                if(!userarray.includes(uid)){
+                    
+                    console.log(`including message from userid ${uid}`);
+                    userarray.push(uid);
+                } 
+            }
+            res.status(200);
+            res.json({NumChats: userarray.length, Users: userarray});
+        })
+    })
+})
 
 // Displays info of a specific user
 router.post("/userinfo", (req, res) => {

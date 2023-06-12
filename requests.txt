@@ -49,7 +49,9 @@ parameters: {
 }
 
 STATUS 200 returns: {
+    userid,
     username,
+    joindate
     // You can add whatever you like here
 }
 STATUS 401 User does not exist
@@ -66,12 +68,7 @@ parameters: {
 }
 returns: {
     - NumChats
-    - Chats[] : array {
-        userid,
-        username,
-        profilepicture,
-        // you can add whatever you like here
-    }
+    - Users[] : array of user id's
 }
 
 ------------------------------------------------
@@ -88,8 +85,22 @@ parameters: {
 returns : {
     - NumMessages
     - Messages[] : array {
-        message,
-        time,
+        messageid,
+        content,
+        sender,
+        receiver
         // you can add whatever you like here
     }
 }
+
+/if/send
+format: JSON, accept: JSON
+
+parameters: {
+    token,
+    userid,
+    message: Maxmimum 65335 Characters
+}
+
+STATUS 200 Returns OK
+Otherwise the request has failed
