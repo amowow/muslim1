@@ -1,0 +1,48 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Footer Styles */
+  footer {
+    background-color: #f4f4f4;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .icons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .icons a {
+    color: #888;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 24px;
+  }
+  
+  /* Main Styles */
+  main {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Help Section Styles */
+  .help-section {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .section-title {
+    margin-top: 0;
+    color: #333;
+  }
+  
+  

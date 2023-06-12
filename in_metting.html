@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="icon" href="T islam logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="in_metting.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <footer>
+    <div class="icons">
+        <a href="home.html"><i class="fas fa-home"></i></a>
+        <a href="Contact.html"><i class="fas fa-calendar"></i></a>
+        <a href="Settings.html"><i class="fas fa-cog"></i></a>
+        <a href="customer support.html"><i class="fas fa-question-circle"></i></a>
+        <a href="index.html" id="logoutButton"><i class="fas fa-sign-out-alt"></i></a>
+    </div>
+</footer>
+
+
+  <div id="video-container">
+    <video id="local-video" autoplay muted></video>
+    <video id="remote-video" autoplay></video>
+  </div>
+  <button id="join-button">Join Meeting</button>
+  <button id="leave-button">Leave Meeting</button>
+  <button id="screen-share-button">Screen Share</button>
+
+  <div id="chat-window">
+    <div id="chat-messages"></div>
+    <form id="chat-form">
+      <input type="text" id="chat-input" placeholder="Type your message...">
+      <button type="submit">Send</button>
+    </form>
+  </div>
+  <script src="muslim1-main/server.js"></script>
+  <script src="muslim1-main/res/resources/js/script.js"></script>
+
+</body>
+</html>

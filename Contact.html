@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" href="T islam logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <footer>
+        <div class="icons">
+            <a href="home.html"><i class="fas fa-home"></i></a>
+            <a href="Contact.html"><i class="fas fa-calendar"></i></a>
+            <a href="Settings.html"><i class="fas fa-cog"></i></a>
+            <a href="customer support.html"><i class="fas fa-question-circle"></i></a>
+            <a href="index.html" id="logoutButton"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+    </footer>
+    <br>
+    <main>
+        <div class="zoom-container">
+            <div class="sidebar">
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search contacts">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                <ul class="contact-list">
+                    <li class="contact-item active" data-conversation="1">
+                        <img src="1img.avif" alt="Contact 1" class="contact-image">
+                        <div class="contact-details">
+                            <h5 class="contact-name">Contact 1</h5>
+                            <p class="contact-id">ID: 123456</p>
+                            <p class="message-content">Don't worry I will be home in the next 15 minutes.</p>
+                        </div>
+                    </li>
+                    <li class="contact-item" data-conversation="2">
+                        <img src="2img.avif" alt="Contact 2" class="contact-image">
+                        <div class="contact-details">
+                            <h5 class="contact-name">Contact 2</h5>
+                            <p class="contact-id">ID: 654321</p>
+                            <p class="message-content">Nice pic</p>
+                        </div>
+                    </li>
+                    <li class="contact-item" data-conversation="3">
+                        <img src="3img.avif" alt="Contact 3" class="contact-image">
+                        <div class="contact-details">
+                            <h5 class="contact-name">Contact 3</h5>
+                            <p class="contact-id">ID: 987654</p>
+                            <p class="message-content">Are you okay?</p>
+                        </div>
+                    </li>
+                    <li class="contact-item" data-conversation="4">
+                        <img src="4img.avif" alt="Contact 4" class="contact-image">
+                        <div class="contact-details">
+                            <h5 class="contact-name">Contact 4</h5>
+                            <p class="contact-id">ID: 456789</p>
+                            <p class="message-content">I'm doing great, thanks! How about you?</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="chat-window">
+                <div class="chat-header">
+                    <img src="contact1.jpg" alt="Contact 1" class="chat-image">
+                    <div class="chat-header-details">
+                        <h4 class="chat-name">Contact 1</h4>
+                        <p class="chat-id">ID: 123456</p>
+                        </div>
+                        </div>
+                        <div class="chat-messages">
+                        <div class="message">
+                        <p class="message-sender">You</p>
+                        <p class="message-content">Hey, how's it going?</p>
+                        </div>
+                        <div class="message">
+                        <p class="message-sender">Contact 1</p>
+                        <p class="message-content">I'm doing great, thanks! How about you?</p>
+                        </div>
+                        </div>
+                        <div class="chat-input">
+                        <input type="text" class="message-input" placeholder="Type your message...">
+                        <button class="send-button"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                        </div>
+                        </div>
+                        </main>
+                        <script>
+                        // Get all contact items
+                        const contactItems = document.querySelectorAll('.contact-item');
+                            // Add click event listener to each contact item
+    contactItems.forEach((item) => {
+        item.addEventListener('click', (event) => {
+            const conversationId = event.currentTarget.dataset.conversation;
+            const selectedContact = document.querySelector(`.contact-item[data-conversation="${conversationId}"]`);
+            const selectedChatName = selectedContact.querySelector('.contact-name').innerText;
+            const selectedChatId = selectedContact.querySelector('.contact-id').innerText;
+            const selectedChatImage = selectedContact.querySelector('.contact-image').src;
+
+            // Update chat header with selected contact details
+            const chatHeader = document.querySelector('.chat-header');
+            chatHeader.querySelector('.chat-name').innerText = selectedChatName;
+            chatHeader.querySelector('.chat-id').innerText = selectedChatId;
+            chatHeader.querySelector('.chat-image').src = selectedChatImage;
+
+            // Update active class for contact item
+            contactItems.forEach((contact) => {
+                contact.classList.remove('active');
+            });
+            selectedContact.classList.add('active');
+        });
+    });
+
+    // Get the user input elements
+    const imageInput = document.getElementById('image-input');
+    const textInput = document.getElementById('text-input');
+    const addButton = document.getElementById('add-button');
+
+    // Add click event listener to the add button
+    addButton.addEventListener('click', () => {
+        const imageUrl = imageInput.value;
+        const text = textInput.value;
+
+        // Create a new contact item
+        const newContactItem = document.createElement('li');
+        newContactItem.classList.add('contact-item');
+        newContactItem.innerHTML = `
+            <img src="${imageUrl}" alt="${text}" class="contact-image">
+            <div class="contact-details">
+                <h5 class="contact-name">${text}</h5>
+                <p class="contact-id">ID: ${generateRandomId()}</p>
+            </div>
+        `;
+        newContactItem.dataset.conversation = generateRandomId();
+
+        // Add click event listener to the new contact item
+        newContactItem.addEventListener('click', (event) => {
+            const conversationId = event.currentTarget.dataset.conversation;
+            const selectedContact = document.querySelector(`.contact-item[data-conversation="${conversationId}"]`);
+            const selectedChatName = selectedContact.querySelector('.contact-name').innerText;
+            const selectedChatId = selectedContact.querySelector('.contact-id').innerText;
+            const selectedChatImage = selectedContact.querySelector('.contact-image').src;
+
+            // Update chat header with selected contact details
+            const chatHeader = document.querySelector('.chat-header');
+            chatHeader.querySelector('.chat-name').innerText = selectedChatName;
+            chatHeader.querySelector('.chat-id').innerText = selectedChatId;
+            chatHeader.querySelector('.chat-image').src = selectedChatImage;
+                        // Update active class for contact item
+                        contactItems.forEach((contact) => {
+                contact.classList.remove('active');
+            });
+            selectedContact.classList.add('active');
+        });
+
+        // Add the new contact item to the contact list
+        const contactList = document.querySelector('.contact-list');
+        contactList.appendChild(newContactItem);
+
+        // Clear the input fields
+        imageInput.value = '';
+        textInput.value = '';
+    });
+
+    // Generate a random IDgit checkout -b NXTdevosc1-main main
+    function generateRandomId() {
+        return Math.floor(Math.random() * 1000000);
+    }
+</script>
+<script src="muslim1-main/server.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href="login.css">
+  <link rel="icon" href="T islam logo.png" type="image/x-icon">
+</head>
+<body>
+  <div class="container">
+    <h1>Login</h1>
+    <form id="loginForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" required>
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="register.html">Register</a></p>
+  </div>
+  
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+
+      if (username && password) {
+        // Retrieve user data from local storage
+        var users = JSON.parse(localStorage.getItem("users")) || [];
+
+        // Check if the entered username and password match
+        var user = users.find(u => u.username === username && u.password === password);
+        if (user) {
+          // Redirect to the account page or any other authenticated page
+          window.location.href = "home.html";
+        } else {
+          alert("Invalid username or password. Please try again.");
+        }
+      } else {
+        alert("Please enter a username and password.");
+      }
+    });
+  </script>
+  
+  <script src="muslim1-main/server.js"></script>
+</body>
+</html>
