@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "cookies": "^0.8.0",
-    "dotenv": "^16.1.4",
-    "ejs": "^3.1.9",
-    "express": "^4.18.2",
-    "mysql": "^2.18.1"
-  }
-}
