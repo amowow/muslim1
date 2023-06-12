@@ -8,7 +8,7 @@ const app = express()
 const Port = 80
 
 const srvif = require("./srvif")
-
+const srvws = require("./srvws");
 
 
 app.use(express.static((__dirname+'\\res')))
