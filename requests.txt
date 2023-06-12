@@ -1,0 +1,106 @@
+This document describes the requests/commands that can be issued to the website's server
+
+STATUS 400 Means Bad request
+
+--------------------------------
+/if/login
+method: POST
+format: JSON, accept: JSON
+
+parameters : {
+    user : upto 128 characters
+    password : upto 255 characters
+}
+
+STATUS 200 returns : {
+     userid,
+     token // must be stored in local storage or in a cookie
+}
+
+STATUS 401 : User not found
+
+----------------------------------------
+
+/if/register
+method: POST
+format: JSON, accept: JSON
+
+parameters : {
+    user : upto 128 characters
+    password : upto 255 characters
+    // You can add whatever you like here
+}
+
+STATUS 200 returns : {
+     userid,
+     token // must be stored in local storage or in a cookie
+}
+STATUS 401 : Username already exists
+
+----------------------------------------
+
+/if/userinfo
+method: POST
+format: JSON, accept: JSON
+
+parameters: {
+    token,
+    userid (OPTIONNAL) id of the user to inspect
+}
+
+STATUS 200 returns: {
+    userid,
+    username,
+    joindate
+    // You can add whatever you like here
+}
+STATUS 401 User does not exist
+
+-------------------------------------------
+
+/if/chats
+
+method: POST
+format: JSON, accept: JSON
+
+parameters: {
+    token
+}
+returns: {
+    - NumChats
+    - Users[] : array of user id's
+}
+
+------------------------------------------------
+
+/if/messages
+method: POST
+format: JSON, accept: JSON
+
+parameters: {
+    token,
+    userid
+}
+
+returns : {
+    - NumMessages
+    - Messages[] : array {
+        messageid,
+        content,
+        sender,
+        receiver
+        // you can add whatever you like here
+    }
+}
+
+/if/send
+format: JSON, accept: JSON
+
+parameters: {
+    token,
+    userid,
+    message: Maxmimum 65335 Characters
+}
+
+STATUS 200 Returns OK
+Otherwise the request has failed
