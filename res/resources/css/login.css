@@ -1,3 +1,69 @@
+.gender-label {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #555555;
+}
+ 
+.gender-select-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.gender-select {
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  width: 100%;
+  appearance: none;
+  background-color: #ffffff;
+  color: #000000;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.gender-select option {
+  color: #000000;
+}
+
+.gender-select-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 6px 0 6px;
+  border-color: #555555 transparent transparent transparent;
+  pointer-events: none;
+}
+
+.gender-select-container::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 6px 6px 6px;
+  border-color: transparent transparent #555555 transparent;
+  pointer-events: none;
+}
+
+/* Adjust the position of the dropdown arrow based on the height of the select element */
+.gender-select-container.small::before,
+.gender-select-container.small::after {
+  top: calc(50% - 4px);
+}
+
+.gender-select-container.large::before,
+.gender-select-container.large::after {
+  top: calc(50% - 8px);
+}
+
 /* login.css */
 
 body {
@@ -33,10 +99,15 @@ label {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="date"] {
   padding: 10px;
   border: 1px solid #cccccc;
   border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+input[type="file"] { /* Added style for the profile picture */
   margin-bottom: 20px;
 }
 
@@ -127,7 +198,6 @@ a:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("background.jpg");
   opacity: 0.2;
   z-index: -1;
 }
