@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>Register</title>
-  <link rel="stylesheet" type="text/css" href="resources/css/login.css">
-  <link rel="icon" href="resources/T islam logo.png" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="login.css">
+  <link rel="icon" href="T islam logo.png" type="image/x-icon">
 </head>
 <body>
   <div class="container">
@@ -11,11 +11,27 @@
     <form id="registerForm">
       <label for="username">Username:</label>
       <input type="text" id="username" required>
+       
       <label for="password">Password:</label>
       <input type="password" id="password" required>
+      
+      <label for="Birthdate">Birthdate:</label>
+      <input type="date" id="Birthdate" required>
+      
+      <label for="gender" class="gender-label">Gender</label>
+      <div class="gender-select-container">
+      <select id="gender" name="gender" required class="gender-select">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      </select>
+      </div>
+
+      <label for="profile-picture">Profile Picture</label>
+      <input type="file" id="profile-picture" name="profile-picture" required>
+
       <button type="submit">Register</button>
     </form>
-    <p>Already have an account? <a href="/login">Login</a></p>
+    <p>Already have an account? <a href="index.html">Login</a></p>
   </div>
   
   <script>
@@ -41,12 +57,13 @@
           localStorage.setItem("users", JSON.stringify(users));
 
           // Redirect to the login page
-          window.location.href = "/";
+          window.location.href = "home.html";
         }
       } else {
         alert("Please enter a username and password.");
       }
     });
   </script>
+<script src="muslim1-main/server.js"></script>
 </body>
 </html>
