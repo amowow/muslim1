@@ -31,18 +31,48 @@ body {
     background-color: #f9f9f9;
   }
   
-  /* Help Section Styles */
-  .help-section {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+ /* Help Section Styles */
+.help-section {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.help-section:hover {
+  background-color: #f5f5f5;
+}
+
+.section-title {
+  margin-top: 0;
+  color: #333;
+  animation: slideIn 1s forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  
-  .section-title {
-    margin-top: 0;
-    color: #333;
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
