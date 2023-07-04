@@ -3,7 +3,7 @@
   font-size: 16px;
   color: #555555;
 }
- 
+
 .gender-select-container {
   position: relative;
   margin-bottom: 20px;
@@ -118,11 +118,39 @@ button[type="submit"] {
   border: none;
   border-radius: 3px;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 button[type="submit"]:hover {
   background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.button-loading {
+  position: relative;
+}
+
+.button-loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-top-color: #007bff;
+  border-radius: 50%;
+  animation: button-loading-spin 1s linear infinite;
+}
+
+@keyframes button-loading-spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 p {
@@ -188,16 +216,9 @@ a:hover {
 
 .login-form {
   position: relative;
+  transition: opacity 0.3s ease-in-out;
 }
 
-.login-form::after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0.2;
-  z-index: -1;
+.login-form:hover::after {
+  opacity: 0.4;
 }
