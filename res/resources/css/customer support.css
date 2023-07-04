@@ -7,7 +7,7 @@ body {
 
 /* Footer Styles */
 footer {
-  background-color: #f4f4f4;
+  background-color: #000000;
   padding: 10px;
   text-align: center;
 }
@@ -19,7 +19,7 @@ footer {
 }
 
 .icons a {
-  color: #888;
+  color: #ffffff;
   text-decoration: none;
   margin: 0 10px;
   font-size: 24px;
