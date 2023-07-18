@@ -68,107 +68,112 @@
                     <div class="chat-header-details">
                         <h4 class="chat-name">Contact 1</h4>
                         <p class="chat-id">ID: 123456</p>
-                        </div>
-                        </div>
-                        <div class="chat-messages">
-                        <div class="message">
+                    </div>
+                </div>
+                <div class="chat-buttons">
+                    <button class="call-button">Call</button>
+                    <button class="video-call-button">Video Call</button>
+                </div>
+                <div class="chat-messages">
+                    <div class="message">
                         <p class="message-sender">You</p>
                         <p class="message-content">Hey, how's it going?</p>
-                        </div>
-                        <div class="message">
+                    </div>
+                    <div class="message">
                         <p class="message-sender">Contact 1</p>
                         <p class="message-content">I'm doing great, thanks! How about you?</p>
-                        </div>
-                        </div>
-                        <div class="chat-input">
-                        <input type="text" class="message-input" placeholder="Type your message...">
-                        <button class="send-button"><i class="fas fa-paper-plane"></i></button>
-                        </div>
-                        </div>
-                        </div>
-                        </main>
-                        <script>
-                        // Get all contact items
-                        const contactItems = document.querySelectorAll('.contact-item');
-                            // Add click event listener to each contact item
-    contactItems.forEach((item) => {
-        item.addEventListener('click', (event) => {
-            const conversationId = event.currentTarget.dataset.conversation;
-            const selectedContact = document.querySelector(`.contact-item[data-conversation="${conversationId}"]`);
-            const selectedChatName = selectedContact.querySelector('.contact-name').innerText;
-            const selectedChatId = selectedContact.querySelector('.contact-id').innerText;
-            const selectedChatImage = selectedContact.querySelector('.contact-image').src;
-
-            // Update chat header with selected contact details
-            const chatHeader = document.querySelector('.chat-header');
-            chatHeader.querySelector('.chat-name').innerText = selectedChatName;
-            chatHeader.querySelector('.chat-id').innerText = selectedChatId;
-            chatHeader.querySelector('.chat-image').src = selectedChatImage;
-
-            // Update active class for contact item
-            contactItems.forEach((contact) => {
-                contact.classList.remove('active');
-            });
-            selectedContact.classList.add('active');
-        });
-    });
-
-    // Get the user input elements
-    const imageInput = document.getElementById('image-input');
-    const textInput = document.getElementById('text-input');
-    const sendbutton = document.getElementById('send-button');
-
-    // Add click event listener to the add button
-    sendbutton.addEventListener('click', () => {
-        const imageUrl = imageInput.value;
-        const text = textInput.value;
-
-        // Create a new contact item
-        const newContactItem = document.createElement('li');
-        newContactItem.classList.add('contact-item');
-        newContactItem.innerHTML = `
-            <img src="${imageUrl}" alt="${text}" class="contact-image">
-            <div class="contact-details">
-                <h5 class="contact-name">${text}</h5>
-                <p class="contact-id">ID: ${generateRandomId()}</p>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" class="message-input" placeholder="Type your message...">
+                    <button class="send-button"><i class="fas fa-paper-plane"></i></button>
+                </div>
             </div>
-        `;
-        newContactItem.dataset.conversation = generateRandomId();
+        </div>
+    </main>
+    <script>
+        // Get all contact items
+        const contactItems = document.querySelectorAll('.contact-item');
+        // Add click event listener to each contact item
+        contactItems.forEach((item) => {
+            item.addEventListener('click', (event) => {
+                const conversationId = event.currentTarget.dataset.conversation;
+                const selectedContact = document.querySelector(`.contact-item[data-conversation="${conversationId}"]`);
+                const selectedChatName = selectedContact.querySelector('.contact-name').innerText;
+                const selectedChatId = selectedContact.querySelector('.contact-id').innerText;
+                const selectedChatImage = selectedContact.querySelector('.contact-image').src;
 
-        // Add click event listener to the new contact item
-        newContactItem.addEventListener('click', (event) => {
-            const conversationId = event.currentTarget.dataset.conversation;
-            const selectedContact = document.querySelector(`.contact-item[data-conversation="${conversationId}"]`);
-            const selectedChatName = selectedContact.querySelector('.contact-name').innerText;
-            const selectedChatId = selectedContact.querySelector('.contact-id').innerText;
-            const selectedChatImage = selectedContact.querySelector('.contact-image').src;
+                // Update chat header with selected contact details
+                const chatHeader = document.querySelector('.chat-header');
+                chatHeader.querySelector('.chat-name').innerText = selectedChatName;
+                chatHeader.querySelector('.chat-id').innerText = selectedChatId;
+                chatHeader.querySelector('.chat-image').src = selectedChatImage;
 
-            // Update chat header with selected contact details
-            const chatHeader = document.querySelector('.chat-header');
-            chatHeader.querySelector('.chat-name').innerText = selectedChatName;
-            chatHeader.querySelector('.chat-id').innerText = selectedChatId;
-            chatHeader.querySelector('.chat-image').src = selectedChatImage;
-                        // Update active class for contact item
-                        contactItems.forEach((contact) => {
-                contact.classList.remove('active');
+                // Update active class for contact item
+                contactItems.forEach((contact) => {
+                    contact.classList.remove('active');
+                });
+                selectedContact.classList.add('active');
             });
-            selectedContact.classList.add('active');
         });
 
-        // Add the new contact item to the contact list
-        const contactList = document.querySelector('.contact-list');
-        contactList.appendChild(newContactItem);
+        // Get the user input elements
+        const imageInput = document.getElementById('image-input');
+        const textInput = document.getElementById('text-input');
+        const sendbutton = document.getElementById('send-button');
 
-        // Clear the input fields
-        imageInput.value = '';
-        textInput.value = '';
-    });
+        // Add click event listener to the add button
+        sendbutton.addEventListener('click', () => {
+            const imageUrl = imageInput.value;
+            const text = textInput.value;
 
-    // Generate a random IDgit checkout -b NXTdevosc1-main main
-    function generateRandomId() {
-        return Math.floor(Math.random() * 1000000);
-    }
-</script>
-<script src="muslim1-main/server.js"></script>
+            // Create a new contact item
+            const newContactItem = document.createElement('li');
+            newContactItem.classList.add('contact-item');
+            newContactItem.innerHTML = `
+                <img src="${imageUrl}" alt="${text}" class="contact-image">
+                <div class="contact-details">
+                    <h5 class="contact-name">${text}</h5>
+                    <p class="contact-id">ID: ${generateRandomId()}</p>
+                </div>
+            `;
+            newContactItem.dataset.conversation = generateRandomId();
+
+            // Add click event listener to the new contact item
+            newContactItem.addEventListener('click', (event) => {
+                const conversationId = event.currentTarget.dataset.conversation;
+                const selectedContact = document.querySelector(`.contact-item[data-conversation="${conversationId}"]`);
+                const selectedChatName = selectedContact.querySelector('.contact-name').innerText;
+                const selectedChatId = selectedContact.querySelector('.contact-id').innerText;
+                const selectedChatImage = selectedContact.querySelector('.contact-image').src;
+
+                // Update chat header with selected contact details
+                const chatHeader = document.querySelector('.chat-header');
+                chatHeader.querySelector('.chat-name').innerText = selectedChatName;
+                chatHeader.querySelector('.chat-id').innerText = selectedChatId;
+                chatHeader.querySelector('.chat-image').src = selectedChatImage;
+
+                // Update active class for contact item
+                contactItems.forEach((contact) => {
+                    contact.classList.remove('active');
+                });
+                selectedContact.classList.add('active');
+            });
+
+            // Add the new contact item to the contact list
+            const contactList = document.querySelector('.contact-list');
+            contactList.appendChild(newContactItem);
+
+            // Clear the input fields
+            imageInput.value = '';
+            textInput.value = '';
+        });
+
+        // Generate a random ID
+        function generateRandomId() {
+            return Math.floor(Math.random() * 1000000);
+        }
+    </script>
+    <script src="muslim1-main/server.js"></script>
 </body>
 </html>
