@@ -1,74 +1,68 @@
-/* app.css */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
+  background-color: #f1f1f1;
 }
 
 /* Footer Styles */
 footer {
-  background-color: #000000;
-  padding: 10px;
-  text-align: center;
+background-color: #000000;
+padding: 10px;
+text-align: center;
 }
 
 .icons {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+display: flex;
+justify-content: space-around;
+align-items: center;
 }
 
 .icons a {
-  color: #ffffff;
-  text-decoration: none;
-  margin: 0 10px;
-  font-size: 24px;
+color: #ffffff;
+text-decoration: none;
+margin: 0 10px;
+font-size: 24px;
 }
 
-.main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+main {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #ffffff;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .zoom-container {
   display: flex;
-  justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto;
-  background-color: #fff;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar {
-  width: 300px;
-  background-color: #f7f7f7;
-  padding: 20px;
-  color: #333;
+  flex: 1;
+  padding: 10px;
+  border-right: 1px solid #dddddd;
 }
 
 .search-bar {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .search-input {
-  flex-grow: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 20px;
-  font-size: 14px;
-  color: #333;
-  background-color: #ebebeb;
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
 }
 
 .search-icon {
-  color: #999;
-  margin-left: 10px;
-  cursor: pointer;
+  margin-left: 5px;
+  color: #888888;
 }
 
 .contact-list {
@@ -85,54 +79,52 @@ footer {
   transition: background-color 0.3s ease;
 }
 
+.contact-item:hover {
+  background-color: #f1f1f1;
+}
+
 .contact-item.active {
-  background-color: #f5f5f5;
+  background-color: #dddddd;
 }
 
 .contact-image {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   object-fit: cover;
   border-radius: 50%;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 .contact-details {
-  flex-grow: 1;
+  flex: 1;
 }
 
 .contact-name {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #333;
+  margin: 0;
 }
 
 .contact-id {
+  margin: 0;
+  color: #888888;
   font-size: 12px;
-  color: #999;
 }
 
 .message-content {
-  font-size: 14px;
-  color: #777;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  margin: 0;
+  color: #333333;
 }
 
 .chat-window {
-  flex-grow: 1;
-  background-color: #f7f7f7;
-  padding: 20px;
-  border-left: 1px solid #ebebeb;
-  overflow-y: auto;
+  flex: 2;
+  padding: 10px;
+  position: relative;
 }
 
 .chat-header {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .chat-image {
@@ -140,22 +132,43 @@ footer {
   height: 40px;
   object-fit: cover;
   border-radius: 50%;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 .chat-header-details {
-  flex-grow: 1;
+  flex: 1;
 }
 
 .chat-name {
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
+  margin: 0;
 }
 
 .chat-id {
+  margin: 0;
+  color: #888888;
   font-size: 12px;
-  color: #777;
+}
+
+.chat-buttons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.call-button,
+.video-call-button {
+  padding: 5px 10px;
+  margin-left: 10px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.call-button:hover,
+.video-call-button:hover {
+  background-color: #0056b3;
 }
 
 .chat-messages {
@@ -167,43 +180,54 @@ footer {
 }
 
 .message-sender {
-font-size: 12px;
-color: #999;
-margin-bottom: 5px;
+  margin: 0;
+  color: #888888;
+  font-size: 12px;
 }
 
 .message-content {
-font-size: 14px;
-color: #333;
+  margin: 0;
+  color: #333333;
 }
 
 .chat-input {
-display: flex;
-align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .message-input {
-flex-grow: 1;
-padding: 10px;
-border: none;
-border-radius: 20px;
-font-size: 14px;
-color: #333;
-background-color: #ebebeb;
-outline: none;
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
 }
 
 .send-button {
-background-color: #007bff;
-color: #fff;
-border: none;
-padding: 10px;
-margin-left: 10px;
-border-radius: 50%;
-cursor: pointer;
-transition: background-color 0.3s ease;
+  padding: 5px 10px;
+  margin-left: 10px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .send-button:hover {
-background-color: #0056b3;
+  background-color: #0056b3;
+}
+
+@media screen and (max-width: 600px) {
+  main {
+      border-radius: 0;
+  }
+  .zoom-container {
+      flex-direction: column;
+  }
+  .sidebar {
+      border-right: none;
+      border-bottom: 1px solid #dddddd;
+  }
+  .chat-window {
+      padding: 10px 0;
+  }
 }
